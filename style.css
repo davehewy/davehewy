@@ -1,0 +1,825 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,500|Vollkorn:400italic,400,700);
+
+/*
+Theme Name: Dave Hewy
+Theme URI: http://wordpress.org/
+Description: The 2010 theme for WordPress is stylish, customizable, simple, and readable -- make it yours with a custom menu, header image, and background. Twenty Ten supports six widgetized areas (two in the sidebar, four in the footer) and featured images (thumbnails for gallery posts and custom header images for posts and pages). It includes stylesheets for print and the admin Visual Editor, special styles for posts in the "Asides" and "Gallery" categories, and has an optional one-column page template that removes the sidebar.
+Author: the WordPress team
+Version: 1.2
+License: GNU General Public License
+License URI: license.txt
+Tags: custom-menu
+*/
+
+/*------------------------------------*\
+	RESET
+\*------------------------------------*/
+html,body,div,span,applet,object,iframe,
+h1,h2,h3,h4,h5,h6,p,blockquote,pre,
+a,abbr,acronym,address,big,cite,code,
+del,dfn,em,img,ins,kbd,q,s,samp,
+small,strike,strong,sub,sup,tt,var,
+b,u,i,center,
+dl,dt,dd,ol,ul,li,
+fieldset,form,label,legend,
+table,caption,tbody,tfoot,thead,tr,th,td,
+article,aside,canvas,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section,summary,
+time,mark,audio,video{
+	margin:0;
+	padding:0;
+}
+article,aside,details,figcaption,figure,footer,
+header,hgroup,menu,nav,section{
+	display: block;
+}
+
+table{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img{ 
+	border:0;
+}
+address,caption,cite,dfn,th,var{
+	font-style:normal;
+	font-weight:normal;
+}
+caption,th{
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6{
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after{
+	content:'';
+}
+abbr,acronym{
+	border:0;
+}
+
+
+/*
+# Grid System drop in.
+*/
+
+/*------------------------------------*\
+	CLEARFIX
+\*------------------------------------*/
+/*
+Fix clearing issues as per: http://nicolasgallagher.com/micro-clearfix-hack/
+*/
+.cf,
+.grids{
+	zoom:1;
+}
+.cf:before,
+.grids:before,
+.cf:after,
+.grids:after{
+	content:"";
+	display:table;
+}
+.cf:after,
+.grids:after{
+	clear:both;
+}
+
+/*
+Most frameworks rely on class="end" or similar to remove the margin from the last column in a row of grids. We don't want to do that so we use a combination of margin- and negative margin-left. It's clever...
+We also allow you to use grid items as stand alone columns or in a series of columns. To use a series just wrap them all in <div class="grids">...</div>
+*/
+.grids{
+	clear:both;
+	max-width:960px;
+	margin:0 0 0 -20px;
+	list-style:none; /* So we can make grids out of lists */
+}
+
+/*
+Here we are using an attribute selector to detect the string 'grid-' in an element's class.
+This works by assuming that anything we call grid-<n> we also want to be a grid item. It means less code and less for you to remember!
+
+Ensure any grid item's FIRST class is a grid-<n> class. e.g.
+VALID: class="grid-4 text-centre"
+INVALID: class="left grid-4"
+*/
+[class^="grid-"]{
+	float:left;
+	margin:0 20px 0 0;
+}
+.grids [class^="grid-"]{
+	margin:0 0 0 20px;
+}
+
+.grid-1{ width:40px }
+.grid-2{ width:100px }
+.grid-3{ width:160px }
+.grid-4{ width:211px; }
+.grid-5{ width:350px }
+.grid-6{ width:340px }
+.grid-7{ width:400px }
+.grid-8{ width:460px }
+.grid-9{ width:520px }
+.grid-10{ width:580px }
+.grid-11{ width:640px }
+.grid-12{ width:700px }
+.grid-13{ width:720px }
+.grid-14{ width:820px }
+.grid-15{ width:880px }
+.grid-16{ width:940px; margin:0 }
+
+
+/*--- PARAGRAPHS ---*/
+p,
+address{
+	margin-bottom:1.5em;
+}
+/*
+MoÕ robust paragraph indenting: http://csswizardry.com/2010/12/mo-robust-paragraph-indenting/
+Uncomment to activate
+p+p{
+	text-indent:2em;
+	margin-top:-1.5em;
+}
+*/
+
+/*--- GENERAL ---*/
+q,
+i,
+em,
+cite{
+	font-style:italic;
+	font-weight:inherit;
+}
+b,
+strong{
+	font-weight:bold;
+	font-style:inherit;
+}
+mark{
+	background:#ffc;
+}
+s,
+del{
+	text-decoration:line-through;
+}
+small{
+	font-size:0.75em;
+	line-height:1;
+}
+
+/*--- CODE ---*/
+pre,
+code{
+	font-family:monospace;
+	font-size:1em;
+}
+pre{
+	overflow:auto;
+	margin-bottom:1.5em;
+	line-height:24px; /* Having to define explicit pixel values :( */
+}
+code{
+	line-height:1;
+}
+
+/*------------------------------------*\
+	IMAGES
+\*------------------------------------*/
+img{
+	max-width:100%;
+	height:auto;
+	/* Give it some text styles to offset alt text */
+	font-style:italic;
+	color:#c00;
+}
+img.left	{ margin:0 20px 0 0; }
+img.right	{ margin:0 0 0 20px; }
+
+/*--- FLASH/VIDEO ---*/
+object,
+embed,
+video{
+	max-width:100%;
+	height:auto;
+}
+
+/*------------------------------------*\
+	MISC
+\*------------------------------------*/
+hr{
+	margin:0 0 1.5em 0;
+}
+.accessibility{
+	/* Hide content off-screen without hiding from screen-readers. N.B. This is not suited to RTL languages */
+	position:absolute;
+	left:-99999px;
+}
+.more-link:after{
+	/* Too many people use &raquo; in their markup to signify progression/movement, that ainÕt cool. LetÕs insert that using content:""; */
+	content:" È";
+}
+.more-link::after{
+	content:" È";
+}
+
+.more-link:after{
+	/* Too many people use &raquo; in their markup to signify progression/movement, that ainÕt cool. LetÕs insert that using content:""; */
+	content:" È";
+}
+.more-link::after{
+	content:" È";
+}
+
+/*--- LINKS ---*/
+/*
+Say no to negative hovers: http://csswizardry.com/2011/05/on-negative-hovers/
+A negative hover is one whose appearance is subtracted from on hover rather than added to.
+*/
+a{
+	text-decoration:none;
+}
+a:visited{
+	opacity:0.8; /* A bit basic, but itÕs a bare minumum... */
+}
+a:hover{
+	text-decoration:underline;
+}
+a:active,
+a:focus{
+	/* Give clicked links a depressed effect. */
+	position:relative;
+	top:1px;
+}
+
+a {
+	color:#c96a6a;
+}
+
+h1 {
+	font-size: 2em;
+	margin:15px 0px;
+}
+
+h1.heading {
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+	font-style: italic;
+}
+
+h3 {
+	font-size: 1.2em;
+	margin: 10px 0px;
+}
+
+h3.top {
+	margin: 0px 0px 10px 0px;
+}
+
+h4 {
+	font-size: 1.3em;
+	margin: 0px 0px 10px 0px;
+	color:#c96a6a;
+}
+
+body,html {
+	margin:0;
+	padding: 0;
+	font-size: 100%;
+}
+
+body {
+	background: url(images/bg.jpg) repeat;
+	font-size:100%;
+	font-family: 'Vollkorn', Georgia, Times, serif;
+	line-height:1.5;
+}
+
+#page {
+	margin: 10px auto;
+	width: 920px;
+	padding-right: 2.083333333%;
+	padding-left: 2.083333333%;
+}
+
+#header {
+	overflow: hidden;}
+
+#header .logo {
+	padding-top: 5px;
+	background: url(images/logo-circle.jpg) no-repeat;
+	width:142px;
+	height:145px;
+	position: relative;
+	cursor: pointer;
+	float:left;
+	width:16.66%;
+}
+
+#header .logo .star {
+	background: url(images/logo-star.png) no-repeat;
+	width:130px;
+	position:absolute;
+	left:5px;
+	top:2px;
+	height:135px;
+	-webkit-transition: -webkit-transform 0.2s ease-in-out; 
+	-moz-transition: -moz-transform 0.2s ease-in-out; 
+	transition: transform 0.2s ease-in-out;	
+}
+
+#header .logo .star span {
+	font-style: italic;
+	color:white;
+	font-size:1.2em;
+	position: absolute;
+	top:55px;
+	text-align: center;
+	display: block;
+	width:100%;
+	text-transform: uppercase;
+}
+
+#header .logo .star:hover {
+	-webkit-mask-image: url(images/logo-star.png);
+	background-color: #000;
+	-webkit-animation-name: spinnerRotate;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+
+/*
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transform: scale(1.2);
+*/
+}
+
+.headline {
+	float:right;
+	width:82.20833%;
+	text-align: center;
+}
+
+h1.heading {
+	font-family: 'Molengo', Georgia, Times, serif;
+	color: #444;
+	font-size: 1.8em;
+	text-shadow: 1px 1px #bababa;
+}
+
+#content {
+	clear:both;
+}
+
+/*
+# Menu Start
+*/
+#top_menu {
+	margin-top: 20px;
+	float: left;
+}
+
+.menu-header ul {
+	list-style-type:  none;
+	padding:0;
+	margin:0;
+	margin-right:-20px;
+}
+
+.menu-header ul li {
+	float:left;
+	padding-left: 70px;
+}
+
+.menu-header ul li a {
+	color:#464646;
+	font-size: 1em;
+	text-decoration: none;
+	display: block;
+	padding:5px 8px;
+}
+
+.menu-header ul li a:hover, .menu-header ul li a:focus {
+	-webkit-border-radius: 6px 6px;
+	-moz-border-radius: 6px 6px;
+	border-radius: 6px 6px;	
+}
+
+.menu-header ul li a:hover {
+	background: #652929;
+	color:#f1f1f1;
+}
+
+.menu-header ul li a:active {
+	background: #632828;
+	color:#f1f1f1;
+
+}
+
+.menu-header ul li.current-menu-item a {
+	background: #632828;
+	color:#f1f1f1;
+	-webkit-box-shadow: 2px 2px 2px #ccc;
+	-moz-box-shadow: 2px 2px 2px #ccc;
+	box-shadow: 2px 2px 2px #ccc;
+	-webkit-border-radius: 6px 6px;
+	-moz-border-radius: 6px 6px;
+	border-radius: 6px 6px;	
+}
+
+.menu-header ul li.current_page_parent a {
+	background: #632828;
+	color:#f1f1f1;
+	-webkit-box-shadow: 2px 2px 2px #ccc;
+	-moz-box-shadow: 2px 2px 2px #ccc;
+	box-shadow: 2px 2px 2px #ccc;
+	-webkit-border-radius: 6px 6px;
+	-moz-border-radius: 6px 6px;
+	border-radius: 6px 6px;	
+}
+
+
+
+/*
+# Music is life element
+*/
+
+.music_is_life {
+	background: url(images/music_is_life.png) no-repeat;
+	float:right;
+	width:60px;
+	height:64px;
+}
+
+/*
+	Portfolio
+*/
+
+.portfolio_wrapper {
+	padding: 0px 20px;
+}
+
+.portfolio_div {
+	background: #f1f1f1;
+	-webkit-border-radius: 5px 5px;
+	-moz-border-radius: 5px 5px;
+	border-radius: 5px 5px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+	height:300px;
+}
+
+.portfolio_margin {
+	margin-top: 20px;
+}
+
+.portfolio_div .wp-post-image {
+	-webkit-border-top-left-radius: 5px 5px;
+	-webkit-border-top-right-radius: 5px 5px;
+	-moz-border-radius-topleft: 5px 5px;
+	-moz-border-radius-topright: 5px 5px;
+	border-top-left-radius: 5px 5px;
+	border-top-right-radius: 5px 5px;
+	height:150px;
+	box-shadow: 0px 2px 5px rgba(0,0,0,0.20);
+}
+
+.portfolio_div h2.entry-title {
+	font-size: 1.3em;
+	padding-left: 5px;
+	margin-bottom: 0px;
+}
+
+.portfolio_div .entry-content {
+	padding: 7px;
+}
+
+.portfolio_div span.entry-date {
+	display: block;
+	padding-left: 7px;
+	font-size: 0.8em;
+	color:#999;
+}
+
+/*
+#	Single portfolio view
+*/
+
+.single-portfolio h1 {
+	font-size: 3em;
+	margin: 0;
+	margin-bottom: 10px;
+	padding: 0;
+}
+
+.single-portfolio .portfolio_slideshow {
+	height:250px;
+}
+
+.portfolio_slideshow img{
+	max-height: 350px;
+}
+
+/*
+# Kick off the content
+*/
+
+#content {
+	overflow: hidden;
+	margin-top:10px;
+}
+
+
+/* 
+# Styled sidebar
+*/
+
+.side_bar_div {
+	background: rgba(188, 188, 188, 0.4);
+	padding: 10px;
+}
+
+.side_bar_div ul {
+	list-style-type: none;
+	padding:0;
+	margin: 0;
+}
+
+.side_bar_div ul li {
+	border-bottom: 1px dashed #bbbbbb;
+	padding: 7px 0px;
+}
+
+.side_bar_div ul li:nth-child(3) {
+	border-bottom: none;
+	padding-bottom: 0px;
+}
+
+.standard_page {
+	background: rgba(255, 255, 255, 0.4);
+	border: 1px solid #ccc;
+	padding: 10px 20px;
+}
+
+/*
+# Footer
+*/
+
+.footer {
+	margin-top: 25px;
+	width: 54.34782609%;
+	float:right;
+}
+
+.pow_footer {
+	display: inline-block;
+	background: url(images/pow.png) no-repeat;
+	width:37px;
+	height:34px;
+}
+
+.copyright {
+	padding-top:10px;
+	width: 42%;
+}
+
+/*
+# Helpers, generic as they may be, quite helpful at times.
+*/
+
+.left	{ float:left!important; }
+.right	{ float:right!important; }
+.clear	{ clear:both; float:none; }
+.ovfl   { overflow: hidden;}
+
+.text-left		{ text-align:left; }
+.text-right		{ text-align:right; }
+.text-center,
+.text-centre	{ text-align:center; }
+.soft-round {
+	-webkit-border-radius: 5px 5px;
+	-moz-border-radius: 5px 5px;
+	border-radius: 5px 5px;
+}
+.rounded { 
+	-webkit-border-radius: 7px 7px;
+	-moz-border-radius: 7px 7px;
+	border-radius: 7px 7px;
+}
+
+.padtop10 {
+	padding-top: 5px;
+}
+
+/** 
+* blog formatting
+*/
+
+.post {
+	margin-bottom: 20px;
+	background: rgba(255, 255, 255, 0.4);
+	border: 1px solid #ccc;
+	padding: 10px 20px 20px 20px;
+}
+
+.post h1.entry-title {
+	font-size: 2.4em;
+}
+
+.post h2.entry-title {
+	font-size: 2.4em;
+	margin:10px 0px 5px 0px;
+	display: inline-block;
+}
+
+.post h2.entry-title a {
+	text-decoration: none;
+}
+
+.post h2.entry-title:hover {
+	border-bottom:1px solid #C96A6A;
+	margin:10px 0px 4px 0px;
+}
+
+.post div.entry-meta {
+	margin-top:10px;
+	margin-right:-30px;
+	float:right;
+	padding:5px;
+	padding-left: 7px;
+	background:#646464;
+	color:#cccccc;
+	-webkit-border-top-right-radius: 5px 5px;
+	-moz-border-radius-topright: 5px 5px;
+	border-top-right-radius: 5px 5px;
+	-webkit-border-bottom-right-radius: 5px 5px;
+	-moz-border-radius-bottomright: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+}
+
+.post .entry-content {
+	margin-top:10px;
+}
+
+.post .entry-content p {
+	font-size: 1.1em;
+}
+
+.post .entry-content p:first-child:first-letter {
+	float: left;
+	display: block;
+	font-size: 3em;
+	padding-top:0;
+	padding-bottom: 0;
+	height:45px;
+	padding-right:5px;
+	margin: 0;
+	margin-top:-12px;
+	font-family: "Beach Type", Georgia, Serif;
+}
+
+.single_entry_tag_list {
+	margin-top: 30px;
+}
+
+span.tag-links a{
+	display: inline-block;
+	padding:3px;
+	-webkit-border-radius: 3px 3px;
+	-moz-border-radius: 3px 3px;
+	border-radius: 3px 3px;
+	background: #652929;
+	color:#f1f1f1;
+	margin-right: 7px;
+}
+
+span.tag-links a:hover {
+	background: #983838;
+	text-decoration: none;
+}
+
+#entry-author-info {
+	margin-bottom: 20px;
+	background: rgba(076, 076, 076, 0.1);
+	border: 1px solid #bfc1c1;
+	padding: 10px 20px 20px 20px;
+}
+
+/*------------------------------------*\
+	FORMS
+\*------------------------------------*/
+/*
+Unfortunately, and somewhat obviously, forms don’t fit the baseline all too well. Perhaps in a later version...
+*/
+fieldset{
+	padding:10px;
+	margin-bottom:1.5em;
+}
+fieldset.half {
+	width:370px;
+}
+label{
+	display:block;
+	cursor:pointer;
+}
+label:after{
+	content:":";
+}
+label::after{
+	content:":";
+}
+input,
+textarea{
+	font-family:inherit;
+	font-size:1em;
+	line-height:1.5;
+}
+
+/*
+Nice UI touch for placeholders. To get placeholders working cross-browser see @dan_bentley’s jQuery plugin: https://github.com/danbentley/placeholder
+*/
+[placeholder]{
+	cursor:pointer;
+}
+[placeholder]:active,
+[placeholder]:focus{
+	cursor:text;
+}
+.check-list{
+	width:100%;
+	overflow:hidden;
+	list-style:none;
+	margin:0 0 1.5em 0;
+}
+.check-list li{
+	width:25%;
+	float:left;
+}
+.check-label{
+	display:inline;
+}
+.check-label:after{
+	content:normal;
+}
+.check-label::after{
+	content:normal;
+}
+.button{
+	cursor:pointer;
+}
+fieldset > :last-child{
+	/* Remove the margin from the last element in the fieldset--this makes our padding more consistent. */
+	margin:0;
+}
+
+.text {
+	outline: none;
+	font-size: 1.1em;
+	width:200px;
+	padding:7px 5px;
+	background: rgba(222, 222, 222,0.5);
+	border:  1px solid #ccc;
+	-webkit-border-radius: 4px 4px;
+	-moz-border-radius: 4px 4px;
+	border-radius: 4px 4px;
+}
+
+.contact_textarea {
+	width:300px;
+	font-size: 1em;
+	padding: 5px;
+	background: rgba(222, 222, 222,0.5);
+	border:  1px solid #ccc;
+	-webkit-border-radius: 4px 4px;
+	-moz-border-radius: 4px 4px;
+	border-radius: 4px 4px;
+}
+
+.small {
+	width: 125px;
+}
+
+input.text:focus {
+	-webkit-box-shadow: 0 0 12px rgb(106, 007, 012, 0.5); 
+	-moz-box-shadow: 0 0 12px rgb(106, 007, 012, 0.5); 
+	box-shadow: 0 0 12px rgb(106, 007, 012, 0.5);
+}
+
+button[type="submit"] {
+	width:120px;
+	padding: 8px 15px;
+	color: #f1f1f1; 
+	font-size: 1.1em;
+	border: none;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#BA1212), to(#6B0303), color-stop(.6,#850000));
+	background-image: -moz-linear-gradient(19% 75% 90deg,#ababab, #c9c9c9, #c7c7c7 100%);
+	background-color: #fff; 
+	-webkit-border-radius: 7px; 
+	-moz-border-radius: 7px; 
+	-o-border-radius: 7px; 
+	border-radius: 7px;
+	cursor: pointer;
+}
